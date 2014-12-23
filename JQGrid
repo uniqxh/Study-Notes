@@ -1,0 +1,11 @@
+1.在jqGrid每一行添加select下拉框的时候要分2步：
+  第一步：比如数据在数组data中，在colModel中这样写
+          { name: "test", index: "test", editable: true, edittype: 'select', editoptions: { value: data } }
+  第二步：之前就是因为没有第二步导致一直没有成功显示下拉框，只需要添加代码如下即可：
+          gridComplete = function() {
+              ……
+              var Ids = $("#tbSearchList").jqGrid("getDataIDs");
+              for( var i = Ids.length - 1; i >= 0; --i){
+                  $("#tbSearchList").editRow(Ids[i]);
+              }
+          };
